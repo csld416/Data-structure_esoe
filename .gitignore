@@ -1,1 +1,3 @@
 **/.zip
+.clang-format
+output/
