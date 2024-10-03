@@ -21,7 +21,7 @@ DListNode<T>* LockDList<T>::newNode(const T& item, DListNode<T>* prev, DListNode
 // lockNode() casts DListNode to LockDListNode and locks it
 template <typename T>
 void LockDList<T>::lockNode(DListNode<T>* node) {
-    LockDListNode<T>* lockNode = dynamic_cast<LockDListNode<T>*>(node);
+    LockDListNode<T>* lockNode = static_cast<LockDListNode<T>*>(node);
     if (lockNode) {
         lockNode->lock();
     }
@@ -30,7 +30,7 @@ void LockDList<T>::lockNode(DListNode<T>* node) {
 // Override remove() to prevent removing locked nodes
 template <typename T>
 void LockDList<T>::remove(DListNode<T>* node) {
-    LockDListNode<T>* lockNode = dynamic_cast<LockDListNode<T>*>(node);
+    LockDListNode<T>* lockNode = static_cast<LockDListNode<T>*>(node);
 
     // Only remove the node if it's not locked
     if (lockNode && !lockNode->locked()) {
