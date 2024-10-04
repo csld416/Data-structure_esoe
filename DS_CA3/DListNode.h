@@ -42,6 +42,7 @@ class DListNode {
      *  @param p the node previous to this node.
      *  @param n the node following this node.
      */
+    virtual ~DListNode() {};
 };
 
 #endif
