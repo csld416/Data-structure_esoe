@@ -11,6 +11,8 @@
 
 #include "DListNode.h"
 
+#include <string>
+
 template <typename T>
 DListNode<T>::DListNode(const T& i, DListNode<T>* p, DListNode<T>* n) {
     item = i;

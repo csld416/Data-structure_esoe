@@ -27,8 +27,12 @@
 #ifndef LOCKDLIST_H
 #define LOCKDLIST_H
 
+#include <string>
+
 #include "DList.h"
 #include "LockDListNode.h"
+
+using namespace std;
 
 // LockDList extends DList
 template <typename T>

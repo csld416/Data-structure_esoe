@@ -10,12 +10,6 @@
  * - Locking a node to prevent modifications.
  * - Checking whether a node is locked.
  *
- * The class also includes a constructor that initializes the node's item and links to previous
- * and next nodes, as well as a method to lock the node.
- *
- * This class is intended to be used with LockDList, providing extended node capabilities
- * within a doubly-linked list.
- *
  * @陳澤諒
  * @B12505047
  * @Department of Engineering Science and Ocean Engineering
@@ -33,17 +27,14 @@ class LockDListNode : public DListNode<T> {
     bool isLocked;  // Indicates if the node is locked
 
    public:
-    // Constructor declaration and definition all in one place
-    LockDListNode(const T& i, DListNode<T>* p, DListNode<T>* n)
-        : DListNode<T>(i, p, n), isLocked(false) {
-        // Call base class constructor and initialize isLocked
-    }
+    // Constructor declaration
+    LockDListNode(const T& i, DListNode<T>* p, DListNode<T>* n);
 
     // Lock the node
-    void lock() { isLocked = true; }
+    void lock();
 
     // Check if the node is locked
-    bool locked() const { return isLocked; }
+    bool locked() const;
 };
 
-#endif
+#endif  // LOCKDLISTNODE_H

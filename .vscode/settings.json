@@ -105,7 +105,8 @@
         "unistd.h": "c",
         "J50078.c": "c",
         "assert.h": "c",
-        "lockdlist.cpp": "c"
+        "lockdlist.cpp": "c",
+        "lockdlistnode": "c"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cquery.cacheDirectory": "${workspaceFolder}/.vscode/cquery_cached_index/",

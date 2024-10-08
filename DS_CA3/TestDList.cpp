@@ -3,7 +3,7 @@
 
 #include "DList.cpp"
 #include "DListNode.cpp"
-
+#include "LockDListNode.cpp"
 //============================================================================
 #include "DList.h"
 #include "DListNode.h"

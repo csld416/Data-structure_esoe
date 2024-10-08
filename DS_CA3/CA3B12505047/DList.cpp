@@ -13,6 +13,7 @@
 #include "DList.h"
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 /* DList invariants:
