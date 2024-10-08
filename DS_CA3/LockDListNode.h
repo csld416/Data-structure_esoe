@@ -1,18 +1,11 @@
 /*
- * This file defines the LockDListNode class, which extends the functionality of the standard
- * DListNode by adding a locking mechanism to prevent certain nodes from being modified or removed.
- *
  * LockDListNode is a templated class that inherits from DListNode and adds a boolean field,
  * `isLocked`, to track whether a node is locked. If a node is locked, it cannot be removed from the
  * list, as this lock status is used by the LockDList class to safeguard nodes.
  *
- * Key functionalities of LockDListNode include:
- * - Locking a node to prevent modifications.
- * - Checking whether a node is locked.
- *
- * @陳澤諒
- * @B12505047
- * @Department of Engineering Science and Ocean Engineering
+ * @author      陳澤諒
+ * @ID          B12505047
+ * @Department  Engineering Science and Ocean Engineering
  * @Affiliation National Taiwan University
  */
 #ifndef LOCKDLISTNODE_H

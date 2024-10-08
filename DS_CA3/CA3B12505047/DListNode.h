@@ -5,20 +5,9 @@
  * The DListNode class is a component of the DList (Doubly Linked List) class and is used to store
  * individual elements in the list. Each node contains three main fields:
  *
- * - `item`: The data stored in the node.
- * - `prev`: A pointer to the previous node in the list.
- * - `next`: A pointer to the next node in the list.
- *
- * The DListNode class is templated to allow for flexibility, enabling it to store any data type.
- * It is designed to be used within the DList class, with DList declared as a friend class
- * to allow it access to the node’s private and protected members.
- *
- * Note: The node construction allows specifying the item to store and the pointers to the previous
- * and next nodes, thus facilitating the linking of nodes in the doubly-linked list.
- *
- * @陳澤諒
- * @B12505047
- * @Department of Engineering Science and Ocean Engineering
+ * @author      陳澤諒
+ * @ID          B12505047
+ * @Department  Engineering Science and Ocean Engineering
  * @Affiliation National Taiwan University
  */
 #ifndef DLISTNODE_H
