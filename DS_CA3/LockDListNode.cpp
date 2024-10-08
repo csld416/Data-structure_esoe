@@ -4,9 +4,9 @@
  * method checks the lock status. The class is templated to handle different data types, with
  * explicit instantiations for `int` and `std::string`.
  *
- * @陳澤諒
- * @B12505047
- * @Department Engineering Science and Ocean Engineering
+ * @author      陳澤諒
+ * @ID          B12505047
+ * @Department  Engineering Science and Ocean Engineering
  * @Affiliation National Taiwan University
  */
 
