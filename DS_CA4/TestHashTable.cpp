@@ -1,50 +1,57 @@
 #include <stdlib.h>
 #include <time.h>
+
 #include <iostream>
 
+#include "CheckerBoard.cpp"
+#include "CheckerBoard.h"
+#include "Double.h"
+#include "Entry.h"
 #include "HashTableChained.cpp"
 #include "HashTableChained.h"
 #include "Integer.h"
-#include"String.h"
-#include"Double.h"
-#include "CheckerBoard.h"
-#include "CheckerBoard.cpp"
-#include "Entry.h"
+#include "String.h"
 
-
-template<typename K, typename V>
+template <typename K, typename V>
 void initTable(HashTableChained<K, V>* table, int numBoards);
 CheckerBoard* randomBoard();
 
-
 int main() {
-
     // initialize random seed:
     srand(time(NULL));
 
     int numBoards = 1000;
 
-    cout << "===============================String Hash Table Test=====================================" << endl;
-    HashTableChained<String*, Integer*>* stringTable = new HashTableChained<String*, Integer*>(numBoards);
+    cout << "===============================String Hash Table "
+            "Test====================================="
+         << endl;
+    HashTableChained<String*, Integer*>* stringTable =
+        new HashTableChained<String*, Integer*>(numBoards);
     stringTable->insert(new String("abc"), new Integer(1));
     stringTable->insert(new String("def"), new Integer(2));
-    cout << "Finding abc should be 1 : "<< stringTable->find(new String("abc")) << endl;
-    cout << "Finding def should be 1 : "<< stringTable->find(new String("def")) << endl;
+    cout << "Finding abc should be 1 : " << stringTable->find(new String("abc")) << endl;
+    cout << "Finding def should be 1 : " << stringTable->find(new String("def")) << endl;
     stringTable->remove(new String("abc"));
-    cout << "Finding abc should be 0 : "<< stringTable->find(new String("abc")) << endl;
+    cout << "Finding abc should be 0 : " << stringTable->find(new String("abc")) << endl;
     cout << "Size should be 1 : " << stringTable->size() << endl;
     stringTable->makeEmpty();
     cout << "Size should be 0 : " << stringTable->size() << endl;
 
-    cout << "===============================Double Hash Table Test=====================================" << endl;
-    HashTableChained<Double*, Integer*>* doubleTable = new HashTableChained<Double*, Integer*>(numBoards);
+    cout << "===============================Double Hash Table "
+            "Test====================================="
+         << endl;
+    HashTableChained<Double*, Integer*>* doubleTable =
+        new HashTableChained<Double*, Integer*>(numBoards);
     initTable(doubleTable, numBoards);
     doubleTable->insert(new Double(10), new Integer(1));
     doubleTable->insert(new Double(20), new Integer(2));
     cout << "Size should be 2 : " << doubleTable->size() << endl;
 
-    cout << "===============================CheckerBoard Hash Table Test===============================" << endl;
-    HashTableChained<CheckerBoard*, Integer*>* table = new HashTableChained<CheckerBoard*, Integer*>(numBoards);
+    cout << "===============================CheckerBoard Hash Table "
+            "Test==============================="
+         << endl;
+    HashTableChained<CheckerBoard*, Integer*>* table =
+        new HashTableChained<CheckerBoard*, Integer*>(numBoards);
     table->makeEmpty();
     for (int i = 0; i < numBoards; i++) {
         CheckerBoard* board = randomBoard();
@@ -61,7 +68,6 @@ int main() {
     // a histograph of the number of entries in each bucket.  Call this method
     // from here.
 }
-
 
 /**
  *  Generates a random 8 x 8 CheckerBoard.
@@ -81,7 +87,7 @@ CheckerBoard* randomBoard() {
  *  @param table is the hash table to be initialized.
  *  @param numBoards is the number of random boards to place in the table.
  **/
-template<typename K, typename V>
+template <typename K, typename V>
 void initTable(HashTableChained<K, V>* table, int numBoards) {
     table->makeEmpty();
     for (int i = 0; i < numBoards; i++) {

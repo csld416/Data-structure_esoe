@@ -11,35 +11,34 @@
 using namespace std;
 
 class String {
-private:
-  string str;
+   private:
+    string str;
 
-public:
+   public:
+    /**
+     *  Construct a new String with the given variable.
+     *  @param str the string by which the String stores.
+     */
+    String(const string& str);
 
-  /**
-   *  Construct a new String with the given variable.
-   *  @param str the string by which the String stores.
-   */
-  String(const string& str);
+    /**
+     *  Get the value of the string variable.
+     *  @return the stored value.
+     */
+    string getvalue() const;
 
-  /**
-   *  Get the value of the string variable.
-   *  @return the stored value.
-   */
-  string getvalue() const;
+    /**
+     *  Returns true if "this" String and "strg" have identical values.
+     *  @param strg is the second String.
+     *  @return true if the string values are equal, false otherwise.
+     */
+    bool equals(const String& strg);
 
-  /**
-   *  Returns true if "this" String and "strg" have identical values.
-   *  @param strg is the second String.
-   *  @return true if the string values are equal, false otherwise.
-   */
-  bool equals(const String& strg);
-
-  /**
-   *  Returns a hash code for this String.
-   *  @return a number between Integer.MIN_VALUE and Integer.MAX_VALUE.
-   */
-  int hashCode() const;
+    /**
+     *  Returns a hash code for this String.
+     *  @return a number between Integer.MIN_VALUE and Integer.MAX_VALUE.
+     */
+    int hashCode() const;
 };
 
 #endif

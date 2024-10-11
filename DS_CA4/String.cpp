@@ -9,17 +9,13 @@
  *  Construct a new String with the given variable.
  *  @param str the string by which the String stores.
  */
-String::String(const string& str) {
-    this->str = str;
-}
+String::String(const string& str) { this->str = str; }
 
 /**
  *  Get the value of the string variable.
  *  @return the stored value.
  */
-string String::getvalue() const {
-    return str;
-}
+string String::getvalue() const { return str; }
 
 /**
  *  Returns true if "this" String and "strg" have identical values.

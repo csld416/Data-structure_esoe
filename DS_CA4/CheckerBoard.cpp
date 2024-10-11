@@ -18,8 +18,7 @@
  */
 CheckerBoard::CheckerBoard() {
     for (int i = 0; i < DIMENSION; i++)
-        for (int j = 0; j < DIMENSION; j++)
-            grid[i][j] = 0;
+        for (int j = 0; j < DIMENSION; j++) grid[i][j] = 0;
 }
 
 /**
@@ -45,9 +44,7 @@ void CheckerBoard::setElementAt(int x, int y, int value) {
  *  @exception ArrayIndexOutOfBoundsException is thrown if an invalid index
  *  is given.
  */
-int CheckerBoard::elementAt(int x, int y) {
-    return grid[x][y];
-}
+int CheckerBoard::elementAt(int x, int y) { return grid[x][y]; }
 
 /**
  *  Returns true if "this" CheckerBoard and "board" have identical values in

@@ -16,7 +16,7 @@
  *  entries.  (The precise number of buckets is up to you, but we recommend
  *  you use a prime number, and shoot for a load factor between 0.5 and 1.)
  **/
-template<typename K, typename V>
+template <typename K, typename V>
 HashTableChained<K, V>::HashTableChained(int sizeEstimate) {
     // Your solution here.
 }
@@ -25,7 +25,7 @@ HashTableChained<K, V>::HashTableChained(int sizeEstimate) {
  *  Construct a new empty hash table with a default size.  Say, a prime in
  *  the neighborhood of 100.
  **/
-template<typename K, typename V>
+template <typename K, typename V>
 HashTableChained<K, V>::HashTableChained() {
     // Your solution here.
 }
@@ -37,7 +37,7 @@ HashTableChained<K, V>::HashTableChained() {
  *  This function should have package protection (so we can test it), and
  *  should be used by insert, find, and remove.
  **/
-template<typename K, typename V>
+template <typename K, typename V>
 int HashTableChained<K, V>::compFunction(int code) {
     // Replace the following line with your solution.
     return 88;
@@ -49,7 +49,7 @@ int HashTableChained<K, V>::compFunction(int code) {
  *  a separate entry.
  *  @return number of entries in the dictionary.
  **/
-template<typename K, typename V>
+template <typename K, typename V>
 int HashTableChained<K, V>::size() {
     // Replace the following line with your solution.
     return 0;
@@ -60,7 +60,7 @@ int HashTableChained<K, V>::size() {
  *
  *  @return true if the dictionary has no entries; false otherwise.
  **/
-template<typename K, typename V>
+template <typename K, typename V>
 bool HashTableChained<K, V>::isEmpty() {
     // Replace the following line with your solution.
     return true;
@@ -77,7 +77,7 @@ bool HashTableChained<K, V>::isEmpty() {
  *  @param key the key by which the entry can be retrieved.
  *  @param value an arbitrary object.
  **/
-template<typename K, typename V>
+template <typename K, typename V>
 void HashTableChained<K, V>::insert(const K& key, const V& value) {
     // Replace the following line with your solution.
 }
@@ -92,7 +92,7 @@ void HashTableChained<K, V>::insert(const K& key, const V& value) {
  *  @return true if an entry containing the key is found, or false if
  *          no entry contains the specified key.
  **/
-template<typename K, typename V>
+template <typename K, typename V>
 bool HashTableChained<K, V>::find(const K& key) {
     // Replace the following line with your solution.
     return false;
@@ -108,15 +108,15 @@ bool HashTableChained<K, V>::find(const K& key) {
  *
  *  @param key the search key.
  */
-template<typename K, typename V>
-void HashTableChained<K, V>::remove(const K&  key) {
+template <typename K, typename V>
+void HashTableChained<K, V>::remove(const K& key) {
     // Replace the following line with your solution.
 }
 
 /**
  *  Remove all entries from the dictionary.
  */
-template<typename K, typename V>
+template <typename K, typename V>
 void HashTableChained<K, V>::makeEmpty() {
     // Your solution here.
 }
