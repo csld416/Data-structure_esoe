@@ -10,6 +10,24 @@
  **/
 
 #include "HashTableChained.h"
+using namespace std;
+
+bool isPrime(int n) {
+    if (n <= 1) return false;
+    if (n == 2 || n == 3) return true;
+    if (n % 2 == 0 || n % 3 == 0) return false;
+    for (int i = 5; i * i <= n; i += 6) {
+        if (n % i == 0 || n % (i + 2) == 0) return false;
+    }
+    return true;
+}
+
+int findNextPrime(int n) {
+    while (!isPrime(n)) {
+        ++n;
+    }
+    return n;
+}
 
 /**
  *  Construct a new empty hash table intended to hold roughly sizeEstimate
@@ -18,7 +36,9 @@
  **/
 template <typename K, typename V>
 HashTableChained<K, V>::HashTableChained(int sizeEstimate) {
-    // Your solution here.
+    int numBuckets = findNextPrime(sizeEstimate / 0.75);
+    buckets.resize(numBuckets);
+    size = 0;
 }
 
 /**
@@ -27,7 +47,9 @@ HashTableChained<K, V>::HashTableChained(int sizeEstimate) {
  **/
 template <typename K, typename V>
 HashTableChained<K, V>::HashTableChained() {
-    // Your solution here.
+    int numBuckets = findNextPrime(100);
+    buckets.resize(numBuckets);
+    size = 0;
 }
 
 /**
@@ -39,8 +61,11 @@ HashTableChained<K, V>::HashTableChained() {
  **/
 template <typename K, typename V>
 int HashTableChained<K, V>::compFunction(int code) {
-    // Replace the following line with your solution.
-    return 88;
+    const int a = 31;
+    const int b = 17;
+    const int p = 10007;
+    int N = buckets.size();
+    return abs((a * hashCode + b) % p) % N;
 }
 
 /**
@@ -51,8 +76,7 @@ int HashTableChained<K, V>::compFunction(int code) {
  **/
 template <typename K, typename V>
 int HashTableChained<K, V>::size() {
-    // Replace the following line with your solution.
-    return 0;
+    return size;
 }
 
 /**
@@ -62,8 +86,7 @@ int HashTableChained<K, V>::size() {
  **/
 template <typename K, typename V>
 bool HashTableChained<K, V>::isEmpty() {
-    // Replace the following line with your solution.
-    return true;
+    return this->size == 0;
 }
 
 /**
@@ -79,7 +102,12 @@ bool HashTableChained<K, V>::isEmpty() {
  **/
 template <typename K, typename V>
 void HashTableChained<K, V>::insert(const K& key, const V& value) {
-    // Replace the following line with your solution.
+    hash<K> hasher;
+    int hashCode = hasher(key);
+    int bucketidx = compFunction(hashCode);
+    auto& bucket = buckets[bucketidx];
+    bucket.push_back(make_pair(key, value));
+    this->size++;
 }
 
 /**
@@ -94,7 +122,15 @@ void HashTableChained<K, V>::insert(const K& key, const V& value) {
  **/
 template <typename K, typename V>
 bool HashTableChained<K, V>::find(const K& key) {
-    // Replace the following line with your solution.
+    hash<K> hasher;
+    int hashCode = hasher(key);
+    int bucketidx = compFunction(hashCode);
+    const auto& bucket = buckets[bucketidx];
+    for (const auto& entry : bucket) {
+        if (entry.first == key) {
+            return true;
+        }
+    }
     return false;
 }
 
@@ -110,7 +146,17 @@ bool HashTableChained<K, V>::find(const K& key) {
  */
 template <typename K, typename V>
 void HashTableChained<K, V>::remove(const K& key) {
-    // Replace the following line with your solution.
+    hash<K> hasher;
+    int hashCode = hasher(key);
+    int bucketidx = compFunction(hashCode);
+    auto& bucket = buckets[bucketidx];
+    for (auto it = bucket.begin(); it != bucket.end(); it++) {
+        if (it->first == key) {
+            bucket.erase(it);
+            this->size--;
+            return;
+        }
+    }
 }
 
 /**
@@ -118,5 +164,8 @@ void HashTableChained<K, V>::remove(const K& key) {
  */
 template <typename K, typename V>
 void HashTableChained<K, V>::makeEmpty() {
-    // Your solution here.
+    for (int i = 0; i < buckets.size(); i++) {
+        buckets[i].clear();
+    }
+    this->size = 0;
 }
