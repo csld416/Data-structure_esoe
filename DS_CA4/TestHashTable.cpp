@@ -3,6 +3,10 @@
 
 #include <iostream>
 
+#include "Dictionary.h"
+#include "Double.cpp"
+#include "String.cpp"
+//----------------------------------------------------------------
 #include "CheckerBoard.cpp"
 #include "CheckerBoard.h"
 #include "Double.h"
@@ -30,6 +34,7 @@ int main() {
     stringTable->insert(new String("abc"), new Integer(1));
     stringTable->insert(new String("def"), new Integer(2));
     cout << "Finding abc should be 1 : " << stringTable->find(new String("abc")) << endl;
+    printf("the current size = %d\n", stringTable->size());
     cout << "Finding def should be 1 : " << stringTable->find(new String("def")) << endl;
     stringTable->remove(new String("abc"));
     cout << "Finding abc should be 0 : " << stringTable->find(new String("abc")) << endl;

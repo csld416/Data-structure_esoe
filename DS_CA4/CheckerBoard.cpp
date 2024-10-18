@@ -17,8 +17,11 @@
  *  Construct a new board in which all cells are zero.
  */
 CheckerBoard::CheckerBoard() {
-    for (int i = 0; i < DIMENSION; i++)
-        for (int j = 0; j < DIMENSION; j++) grid[i][j] = 0;
+    for (int i = 0; i < DIMENSION; i++) {
+        for (int j = 0; j < DIMENSION; j++) {
+            grid[i][j] = 0;
+        }
+    }
 }
 
 /**
@@ -53,10 +56,14 @@ int CheckerBoard::elementAt(int x, int y) { return grid[x][y]; }
  *  @return true if the boards are equal, false otherwise.
  */
 bool CheckerBoard::equals(const CheckerBoard& board) {
-    // Replace the following line with your solution.  Be sure to return false
-    //   (rather than throwing a ClassCastException) if "board" is not
-    //   a CheckerBoard.
-    return false;
+    for (int i = 0; i < DIMENSION; i++) {
+        for (int j = 0; j < DIMENSION; j++) {
+            if (this->grid[i][j] != board.grid[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 /**
@@ -64,6 +71,13 @@ bool CheckerBoard::equals(const CheckerBoard& board) {
  *  @return a number between Integer.MIN_VALUE and Integer.MAX_VALUE.
  */
 int CheckerBoard::hashCode() {
-    // Replace the following line with your solution.
-    return 99;
+    int hash = 0;
+    int base = 3;
+    int prime = 1000000007;
+    for (int i = 0; i < DIMENSION; i++) {
+        for (int j = 0; j < DIMENSION; j++) {
+            hash = (base * hash + grid[i][j]) % prime;
+        }
+    }
+    return hash;
 }

@@ -24,7 +24,7 @@ template <typename K, typename V>
 class HashTableChained : public Dictionary<K, V> {
    private:
     vector<list<pair<K, V>>> buckets;
-    int size;
+    int Tablesize;
 
    public:
     HashTableChained(int sizeEstimate);

@@ -5,6 +5,8 @@
 
 #include "Double.h"
 
+#include <functional>
+using namespace std;
 /**
  *  Construct a new Double with the given variable.
  *  @param d the double variable by which the Double stores.
@@ -22,18 +24,10 @@ double Double::getvalue() const { return d; }
  *  @param db is the second Double.
  *  @return true if the double values are equal, false otherwise.
  */
-bool Double::equals(const Double& db) {
-    // Replace the following line with your solution.  Be sure to return false
-    //   (rather than throwing a ClassCastException) if "db" is not
-    //   a Double.
-    return false;
-}
+bool Double::equals(const Double& db) { return this->d == db.d; }
 
 /**
  *  Returns a hash code for this Double.
  *  @return a number between Integer.MIN_VALUE and Integer.MAX_VALUE.
  */
-int Double::hashCode() const {
-    // Replace the following line with your solution.
-    return 77;
-}
+int Double::hashCode() const { return hash<double>{}(d); }

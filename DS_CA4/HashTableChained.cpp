@@ -38,7 +38,7 @@ template <typename K, typename V>
 HashTableChained<K, V>::HashTableChained(int sizeEstimate) {
     int numBuckets = findNextPrime(sizeEstimate / 0.75);
     buckets.resize(numBuckets);
-    size = 0;
+    Tablesize = 0;
 }
 
 /**
@@ -49,7 +49,7 @@ template <typename K, typename V>
 HashTableChained<K, V>::HashTableChained() {
     int numBuckets = findNextPrime(100);
     buckets.resize(numBuckets);
-    size = 0;
+    Tablesize = 0;
 }
 
 /**
@@ -65,7 +65,7 @@ int HashTableChained<K, V>::compFunction(int code) {
     const int b = 17;
     const int p = 10007;
     int N = buckets.size();
-    return abs((a * hashCode + b) % p) % N;
+    return abs((a * code + b) % p) % N;
 }
 
 /**
@@ -76,7 +76,7 @@ int HashTableChained<K, V>::compFunction(int code) {
  **/
 template <typename K, typename V>
 int HashTableChained<K, V>::size() {
-    return size;
+    return Tablesize;
 }
 
 /**
@@ -86,7 +86,7 @@ int HashTableChained<K, V>::size() {
  **/
 template <typename K, typename V>
 bool HashTableChained<K, V>::isEmpty() {
-    return this->size == 0;
+    return Tablesize == 0;
 }
 
 /**
@@ -107,7 +107,7 @@ void HashTableChained<K, V>::insert(const K& key, const V& value) {
     int bucketidx = compFunction(hashCode);
     auto& bucket = buckets[bucketidx];
     bucket.push_back(make_pair(key, value));
-    this->size++;
+    Tablesize++;
 }
 
 /**
@@ -127,7 +127,7 @@ bool HashTableChained<K, V>::find(const K& key) {
     int bucketidx = compFunction(hashCode);
     const auto& bucket = buckets[bucketidx];
     for (const auto& entry : bucket) {
-        if (entry.first == key) {
+        if (entry.first->equals(*key)) {
             return true;
         }
     }
@@ -151,9 +151,9 @@ void HashTableChained<K, V>::remove(const K& key) {
     int bucketidx = compFunction(hashCode);
     auto& bucket = buckets[bucketidx];
     for (auto it = bucket.begin(); it != bucket.end(); it++) {
-        if (it->first == key) {
+        if (it->first->equals(*key)) {
             bucket.erase(it);
-            this->size--;
+            Tablesize--;
             return;
         }
     }
@@ -167,5 +167,5 @@ void HashTableChained<K, V>::makeEmpty() {
     for (int i = 0; i < buckets.size(); i++) {
         buckets[i].clear();
     }
-    this->size = 0;
+    Tablesize = 0;
 }
