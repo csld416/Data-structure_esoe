@@ -26,7 +26,7 @@ string String::getvalue() const { return str; }
  *  @param strg is the second String.
  *  @return true if the string values are equal, false otherwise.
  */
-bool String::equals(const String& strg) { return this->str == strg.str; }
+bool String::equals(const String& strg) { return this->getvalue() == strg.getvalue(); }
 
 /**
  *  Returns a hash code for this String.

@@ -23,8 +23,18 @@ using namespace std;
 template <typename K, typename V>
 class HashTableChained : public Dictionary<K, V> {
    private:
-    vector<list<pair<K, V>>> buckets;
-    int Tablesize;
+    int SlotSize;
+    int EntryCount;
+    class ListNode {
+       public:
+        Entry<K, V> pair;
+        ListNode* next;
+
+        ListNode(const K& key, const V& value, ListNode* nextNode = nullptr)
+            : pair(key, value), next(nextNode) {}
+    };
+
+    vector<ListNode*> buckets;
 
    public:
     HashTableChained(int sizeEstimate);
@@ -36,6 +46,28 @@ class HashTableChained : public Dictionary<K, V> {
     virtual bool find(const K& key);
     virtual void remove(const K& key);
     virtual void makeEmpty();
+    void printTable() const {
+        for (size_t i = 0; i < buckets.size(); i++) {
+            ListNode* current = buckets[i];
+
+            // Skip the bucket if it is empty
+            if (!current) {
+                continue;
+            }
+
+            // Print the bucket index followed by entries
+            std::cout << "Bucket " << i << ": ";
+            while (current) {
+                std::cout << "<" << current->pair.getkey() << ", " << current->pair.getvalue()
+                          << ">";
+                if (current->next) {
+                    std::cout << " -> ";
+                }
+                current = current->next;
+            }
+            std::cout << std::endl;
+        }
+    }
 };
 
 #endif

@@ -33,10 +33,12 @@ int main() {
         new HashTableChained<String*, Integer*>(numBoards);
     stringTable->insert(new String("abc"), new Integer(1));
     stringTable->insert(new String("def"), new Integer(2));
+    stringTable->printTable();
     cout << "Finding abc should be 1 : " << stringTable->find(new String("abc")) << endl;
-    printf("the current size = %d\n", stringTable->size());
     cout << "Finding def should be 1 : " << stringTable->find(new String("def")) << endl;
     stringTable->remove(new String("abc"));
+    stringTable->printTable();
+
     cout << "Finding abc should be 0 : " << stringTable->find(new String("abc")) << endl;
     cout << "Size should be 1 : " << stringTable->size() << endl;
     stringTable->makeEmpty();

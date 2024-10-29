@@ -38,7 +38,8 @@ template <typename K, typename V>
 HashTableChained<K, V>::HashTableChained(int sizeEstimate) {
     int numBuckets = findNextPrime(sizeEstimate / 0.75);
     buckets.resize(numBuckets);
-    Tablesize = 0;
+    SlotSize = numBuckets;
+    EntryCount = 0;
 }
 
 /**
@@ -49,7 +50,8 @@ template <typename K, typename V>
 HashTableChained<K, V>::HashTableChained() {
     int numBuckets = findNextPrime(100);
     buckets.resize(numBuckets);
-    Tablesize = 0;
+    SlotSize = numBuckets;
+    EntryCount = 0;
 }
 
 /**
@@ -76,7 +78,7 @@ int HashTableChained<K, V>::compFunction(int code) {
  **/
 template <typename K, typename V>
 int HashTableChained<K, V>::size() {
-    return Tablesize;
+    return EntryCount;
 }
 
 /**
@@ -86,7 +88,7 @@ int HashTableChained<K, V>::size() {
  **/
 template <typename K, typename V>
 bool HashTableChained<K, V>::isEmpty() {
-    return Tablesize == 0;
+    return EntryCount == 0;
 }
 
 /**
@@ -102,12 +104,15 @@ bool HashTableChained<K, V>::isEmpty() {
  **/
 template <typename K, typename V>
 void HashTableChained<K, V>::insert(const K& key, const V& value) {
-    hash<K> hasher;
-    int hashCode = hasher(key);
-    int bucketidx = compFunction(hashCode);
-    auto& bucket = buckets[bucketidx];
-    bucket.push_back(make_pair(key, value));
-    Tablesize++;
+    int bucketidx = compFunction(key->hashCode());
+    ListNode* curr = buckets[bucketidx];
+    ListNode* newNode = new ListNode(key, value, nullptr);
+
+    newNode->next = curr;
+    buckets[bucketidx] = newNode;
+
+    EntryCount++;
+    return;
 }
 
 /**
@@ -122,14 +127,22 @@ void HashTableChained<K, V>::insert(const K& key, const V& value) {
  **/
 template <typename K, typename V>
 bool HashTableChained<K, V>::find(const K& key) {
-    hash<K> hasher;
-    int hashCode = hasher(key);
-    int bucketidx = compFunction(hashCode);
-    const auto& bucket = buckets[bucketidx];
-    for (const auto& entry : bucket) {
-        if (entry.first->equals(*key)) {
-            return true;
+    int bucketidx = compFunction(key->hashCode());
+    ListNode* curr = buckets[bucketidx];
+
+    while (curr) {
+        if constexpr (std::is_pointer_v<K>) {
+            // If K is a pointer, use value comparison
+            if (curr->pair.getkey() && key && curr->pair.getkey()->equals(*key)) {
+                return true;
+            }
+        } else {
+            // If K is not a pointer, use direct comparison
+            if (curr->pair.getkey() == key) {
+                return true;
+            }
         }
+        curr = curr->next;
     }
     return false;
 }
@@ -146,16 +159,24 @@ bool HashTableChained<K, V>::find(const K& key) {
  */
 template <typename K, typename V>
 void HashTableChained<K, V>::remove(const K& key) {
-    hash<K> hasher;
-    int hashCode = hasher(key);
-    int bucketidx = compFunction(hashCode);
-    auto& bucket = buckets[bucketidx];
-    for (auto it = bucket.begin(); it != bucket.end(); it++) {
-        if (it->first->equals(*key)) {
-            bucket.erase(it);
-            Tablesize--;
+    int bucketidx = compFunction(key->hashCode());
+
+    ListNode* curr = buckets[bucketidx];
+    ListNode* prev = nullptr;
+
+    while (curr) {
+        if (curr->pair.getkey()->equals(*key)) {
+            if (prev == nullptr) {
+                buckets[bucketidx] = curr->next;
+            } else {
+                prev->next = curr->next;
+            }
+            delete curr;
+            EntryCount--;
             return;
         }
+        prev = curr;
+        curr = curr->next;
     }
 }
 
@@ -164,8 +185,15 @@ void HashTableChained<K, V>::remove(const K& key) {
  */
 template <typename K, typename V>
 void HashTableChained<K, V>::makeEmpty() {
-    for (int i = 0; i < buckets.size(); i++) {
-        buckets[i].clear();
+    for (ListNode*& head : buckets) {
+        // Traverse and delete each node in the linked list
+        ListNode* current = head;
+        while (current != nullptr) {
+            ListNode* nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+        head = nullptr;
     }
-    Tablesize = 0;
+    EntryCount = 0;
 }
