@@ -33,11 +33,9 @@ int main() {
         new HashTableChained<String*, Integer*>(numBoards);
     stringTable->insert(new String("abc"), new Integer(1));
     stringTable->insert(new String("def"), new Integer(2));
-    stringTable->printTable();
     cout << "Finding abc should be 1 : " << stringTable->find(new String("abc")) << endl;
     cout << "Finding def should be 1 : " << stringTable->find(new String("def")) << endl;
     stringTable->remove(new String("abc"));
-    stringTable->printTable();
 
     cout << "Finding abc should be 0 : " << stringTable->find(new String("abc")) << endl;
     cout << "Size should be 1 : " << stringTable->size() << endl;
@@ -52,7 +50,7 @@ int main() {
     initTable(doubleTable, numBoards);
     doubleTable->insert(new Double(10), new Integer(1));
     doubleTable->insert(new Double(20), new Integer(2));
-    cout << "Size should be 2 : " << doubleTable->size() << endl;
+    cout << "Size should be 1002 : " << doubleTable->size() << endl;
 
     cout << "===============================CheckerBoard Hash Table "
             "Test==============================="

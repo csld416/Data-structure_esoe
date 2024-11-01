@@ -9,6 +9,8 @@
 
 #include "Double.h"
 
+#include <climits>
+#include <cmath>
 #include <functional>
 using namespace std;
 /**
@@ -28,10 +30,18 @@ double Double::getvalue() const { return d; }
  *  @param db is the second Double.
  *  @return true if the double values are equal, false otherwise.
  */
-bool Double::equals(const Double& db) { return this->d == db.d; }
+bool Double::equals(const Double& db) {
+    double episilon = 1e-9;
+    return fabs(this->d - db.d) < episilon;
+}
 
 /**
  *  Returns a hash code for this Double.
  *  @return a number between Integer.MIN_VALUE and Integer.MAX_VALUE.
  */
-int Double::hashCode() const { return hash<double>{}(d); }
+int Double::hashCode() const {
+    hash<double> hashFunction;
+    size_t hashValue = hashFunction(d);
+
+    return static_cast<int>(hashValue % INT_MAX);
+}

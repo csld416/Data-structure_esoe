@@ -8,8 +8,8 @@
  */
 #include "String.h"
 
+#include <climits>
 #include <functional>
-
 using namespace std;
 
 /**
@@ -35,4 +35,7 @@ bool String::equals(const String& strg) { return str == strg.str; }
  *  Returns a hash code for this String.
  *  @return a number between Integer.MIN_VALUE and Integer.MAX_VALUE.
  */
-int String::hashCode() const { return hash<string>{}(str); }
+int String::hashCode() const {
+    size_t hashValue = hash<string>{}(str);
+    return static_cast<int>(hashValue % INT_MAX);
+}
