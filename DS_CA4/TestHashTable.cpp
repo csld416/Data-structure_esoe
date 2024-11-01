@@ -101,3 +101,61 @@ void initTable(HashTableChained<K, V>* table, int numBoards) {
         table->insert(new Double(i), new Integer(i));
     }
 }
+
+void testWithIntegerKeys() {
+    cout << "Testing HashTableChained with integer keys:" << endl;
+
+    // Hash table with integer keys and string values
+    HashTableChained<int, string> hashTable(10);
+
+    // Insert elements
+    hashTable.insert(1, "One");
+    hashTable.insert(2, "Two");
+    hashTable.insert(3, "Three");
+
+    // Display size and find operations
+    cout << "Size after insertions: " << hashTable.size() << endl;
+    cout << "Finding key 2: " << (hashTable.find(2) ? "Found" : "Not Found") << endl;
+
+    // Remove key and test
+    hashTable.remove(2);
+    cout << "Size after removing key 2: " << hashTable.size() << endl;
+    cout << "Finding key 2 after removal: " << (hashTable.find(2) ? "Found" : "Not Found") << endl;
+
+    // Clear table
+    hashTable.makeEmpty();
+    cout << "Size after clearing table: " << hashTable.size() << endl;
+    cout << endl;
+}
+
+void testWithStringPointerKeys() {
+    cout << "Testing HashTableChained with string pointer keys:" << endl;
+
+    // Hash table with string pointers as keys and integer values
+    HashTableChained<string*, int> hashTable(10);
+
+    // Define string keys
+    string key1 = "alpha";
+    string key2 = "beta";
+    string key3 = "gamma";
+
+    // Insert entries
+    hashTable.insert(&key1, 100);
+    hashTable.insert(&key2, 200);
+    hashTable.insert(&key3, 300);
+
+    // Test size and find operations
+    cout << "Size after insertions: " << hashTable.size() << endl;
+    cout << "Finding key 'beta': " << (hashTable.find(&key2) ? "Found" : "Not Found") << endl;
+
+    // Remove key and test
+    hashTable.remove(&key2);
+    cout << "Size after removing key 'beta': " << hashTable.size() << endl;
+    cout << "Finding key 'beta' after removal: " << (hashTable.find(&key2) ? "Found" : "Not Found")
+         << endl;
+
+    // Clear table
+    hashTable.makeEmpty();
+    cout << "Size after clearing table: " << hashTable.size() << endl;
+    cout << endl;
+}

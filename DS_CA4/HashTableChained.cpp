@@ -1,4 +1,4 @@
-/**
+/*
  *  HashTableChained extends a Dictionary as a hash table with chaining.
  *  All objects used as keys must have a valid hashCode() method, which is
  *  used to determine which bucket of the hash table an entry is stored in.
@@ -6,28 +6,14 @@
  *  Integer.MIN_VALUE and Integer.MAX_VALUE.  The HashTableChained class
  *  implements only the compression function, which maps the hash code to
  *  a bucket in the table's range.
- *
- **/
+ * @陳澤諒
+ * @B12505047
+ * @Department Engineering Science and Ocean Engineering
+ * @Affiliation National Taiwan University
+ */
 
 #include "HashTableChained.h"
 using namespace std;
-
-bool isPrime(int n) {
-    if (n <= 1) return false;
-    if (n == 2 || n == 3) return true;
-    if (n % 2 == 0 || n % 3 == 0) return false;
-    for (int i = 5; i * i <= n; i += 6) {
-        if (n % i == 0 || n % (i + 2) == 0) return false;
-    }
-    return true;
-}
-
-int findNextPrime(int n) {
-    while (!isPrime(n)) {
-        ++n;
-    }
-    return n;
-}
 
 /**
  *  Construct a new empty hash table intended to hold roughly sizeEstimate
@@ -131,7 +117,7 @@ bool HashTableChained<K, V>::find(const K& key) {
     ListNode* curr = buckets[bucketidx];
 
     while (curr) {
-        if constexpr (std::is_pointer_v<K>) {
+        if constexpr (is_pointer_v<K>) {
             // If K is a pointer, use value comparison
             if (curr->pair.getkey() && key && curr->pair.getkey()->equals(*key)) {
                 return true;

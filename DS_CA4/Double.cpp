@@ -1,7 +1,11 @@
-/**
+/*
  *  A class that stores a variable of type double and generates a hash code for it.
  *
- **/
+ * @陳澤諒
+ * @B12505047
+ * @Department Engineering Science and Ocean Engineering
+ * @Affiliation National Taiwan University
+ */
 
 #include "Double.h"
 
