@@ -8,26 +8,18 @@
 #ifndef ENTRY_H
 #define ENTRY_H
 
-template<typename K, typename V>
+template <typename K, typename V>
 class Entry {
-protected:
-  K key;
-  V value;
+   protected:
+    K key;
+    V value;
 
-public:
+   public:
+    Entry(K k, V v) : key(k), value(v) {}
 
-  Entry(K k, V v):key(k),value(v) {
-   
-  }
+    K getkey() { return key; }
 
-  K getkey() {
-    return key;
-  }
-
-  V getvalue() {
-    return value;
-  }
-
+    V getvalue() { return value; }
 };
 
 #endif

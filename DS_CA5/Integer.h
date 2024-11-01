@@ -8,36 +8,31 @@
 #define INTEGER_H
 
 class Integer {
-private:
-  int i;
+   private:
+    int i;
 
-public:
+   public:
+    /**
+     *  Construct a new Integer with the given variable.
+     *  @param i the int variable by which the Integer stores.
+     */
+    Integer(const int& i) { this->i = i; }
 
-  /**
-   *  Construct a new Integer with the given variable.
-   *  @param i the int variable by which the Integer stores.
-   */
-  Integer(const int& i) {
-    this->i = i;
-  }
+    /**
+     *  Get the value of the int variable.
+     *  @return the stored value.
+     */
+    int getvalue() const { return i; }
 
-  /**
-   *  Get the value of the int variable.
-   *  @return the stored value.
-   */
-  int getvalue() const {
-    return i;
-  }
-
-  int compareTo(const Integer& integer) const {
-    if (i > integer.getvalue()) {
-      return 1;
-    } else if(i < integer.getvalue()) {
-      return -1;
-    } else {
-      return 0;
+    int compareTo(const Integer& integer) const {
+        if (i > integer.getvalue()) {
+            return 1;
+        } else if (i < integer.getvalue()) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
-  }
 };
 
 #endif
