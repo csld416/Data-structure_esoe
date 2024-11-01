@@ -1,13 +1,10 @@
-/**
- * Testing program for HashTableChained.
+/*
+ * test
  *
- * @author: Hao Ying Liang
- * @ID: B02505012
- * @Department: Engineering Science and Ocean Engineering
- * @Affiliation: National Taiwan University
- *
- * TestHashTable.cpp
- * version 1.0
+ * @陳澤諒
+ * @B12505047
+ * @Department Engineering Science and Ocean Engineering
+ * @Affiliation National Taiwan University
  */
 
 #include <climits>

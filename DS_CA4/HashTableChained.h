@@ -13,6 +13,8 @@
 #ifndef HASHTABLECHAINED_H
 #define HASHTABLECHAINED_H
 
+#include <cmath>
+#include <iostream>
 #include <list>
 #include <vector>
 

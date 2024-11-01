@@ -117,16 +117,8 @@ bool HashTableChained<K, V>::find(const K& key) {
     ListNode* curr = buckets[bucketidx];
 
     while (curr) {
-        if constexpr (is_pointer_v<K>) {
-            // If K is a pointer, use value comparison
-            if (curr->pair.getkey() && key && curr->pair.getkey()->equals(*key)) {
-                return true;
-            }
-        } else {
-            // If K is not a pointer, use direct comparison
-            if (curr->pair.getkey() == key) {
-                return true;
-            }
+        if (curr->pair.getkey() && key && curr->pair.getkey()->equals(*key)) {
+            return true;
         }
         curr = curr->next;
     }
