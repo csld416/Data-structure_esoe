@@ -74,16 +74,15 @@ class HashTableChained : public Dictionary<K, V> {
             }
 
             // Print the bucket index followed by entries
-            std::cout << "Bucket " << i << ": ";
+            cout << "Bucket " << i << ": ";
             while (current) {
-                std::cout << "<" << current->pair.getkey() << ", " << current->pair.getvalue()
-                          << ">";
+                cout << "<" << current->pair.getkey() << ", " << current->pair.getvalue() << ">";
                 if (current->next) {
-                    std::cout << " -> ";
+                    cout << " -> ";
                 }
                 current = current->next;
             }
-            std::cout << std::endl;
+            cout << std::endl;
         }
     }
 };
