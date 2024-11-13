@@ -6,8 +6,8 @@
 #include "Integer.h"
 #include "String.h"
 //====
-#include "BinaryTreeNode.cpp"
 #include "BinaryTreeNode.h"
+#include "Dictionary.h"
 #include "Entry.h"
 using namespace std;
 

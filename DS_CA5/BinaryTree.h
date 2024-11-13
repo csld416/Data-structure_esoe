@@ -12,6 +12,10 @@
 
 template <typename K, typename V>
 class BinaryTree : public Dictionary<K, V> {
+   private:
+    BinaryTreeNode<K, V>* removeHelper(const K& key, BinaryTreeNode<K, V>* node);
+    BinaryTreeNode<K, V>* findMin(BinaryTreeNode<K, V>* node);
+    void makeEmptyHelper(BinaryTreeNode<K, V>* node);
     /**
      *  size is the number of items stored in the dictionary.
      *  root is the BinaryTreeNode that serves as root of the tree.  If there

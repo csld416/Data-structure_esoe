@@ -73,7 +73,14 @@ void BinaryTree<K, V>::insert(const K& key, const V& value) {
  **/
 template <typename K, typename V>
 BinaryTreeNode<K, V>* BinaryTree<K, V>::findHelper(const K& key, BinaryTreeNode<K, V>* node) {
-    // Replace the following line with your solution.
+    if (node == NULL) {
+        return NULL;
+    }
+    if (key.compareTo(node->entry->getkey()) == 0) {
+        return node;
+    }
+    findHelper(key, node->leftChild);
+    findHelper(key, node->rightChild);
     return NULL;
 }
 
@@ -105,7 +112,52 @@ Entry<K, V>* BinaryTree<K, V>::find(const K& key) {
  */
 template <typename K, typename V>
 void BinaryTree<K, V>::remove(const K& key) {
-    // Your solution here.
+    root = removeHelper(key, root);
+}
+
+template <typename K, typename V>
+BinaryTreeNode<K, V>* BinaryTree<K, V>::removeHelper(const K& key, BinaryTreeNode<K, V>* node) {
+    if (node == NULL) {
+        return NULL;
+    }
+
+    // Locate the node to remove
+    if (key.compareTo(node->entry->getkey()) < 0) {
+        node->leftChild = removeHelper(key, node->leftChild);
+    } else if (key.compareTo(node->entry->getkey()) > 0) {
+        node->rightChild = removeHelper(key, node->rightChild);
+    } else {
+        // Node found
+        if (node->leftChild == NULL && node->rightChild == NULL) {
+            // Case 1: No children
+            delete node;
+            node = NULL;
+        } else if (node->leftChild == NULL) {
+            // Case 2: One child (right)
+            BinaryTreeNode<K, V>* temp = node;
+            node = node->rightChild;
+            delete temp;
+        } else if (node->rightChild == NULL) {
+            // Case 2: One child (left)
+            BinaryTreeNode<K, V>* temp = node;
+            node = node->leftChild;
+            delete temp;
+        } else {
+            // Case 3: Two children
+            BinaryTreeNode<K, V>* temp = findMin(node->rightChild);
+            node->entry = temp->entry;
+            node->rightChild = removeHelper(temp->entry->getkey(), node->rightChild);
+        }
+    }
+    return node;
+}
+
+template <typename K, typename V>
+BinaryTreeNode<K, V>* BinaryTree<K, V>::findMin(BinaryTreeNode<K, V>* node) {
+    while (node->leftChild != NULL) {
+        node = node->leftChild;
+    }
+    return node;
 }
 
 /**
@@ -113,7 +165,20 @@ void BinaryTree<K, V>::remove(const K& key) {
  */
 template <typename K, typename V>
 void BinaryTree<K, V>::makeEmpty() {
-    // Your solution here.
+    makeEmptyHelper(root);
+    root = NULL;
+    tsize = 0;
+}
+
+template <typename K, typename V>
+void BinaryTree<K, V>::makeEmptyHelper(BinaryTreeNode<K, V>* node) {
+    if (node != NULL) {
+        // Recursively delete left and right subtrees
+        makeEmptyHelper(node->leftChild);
+        makeEmptyHelper(node->rightChild);
+        // Delete the current node
+        delete node;
+    }
 }
 
 /**
